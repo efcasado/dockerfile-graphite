@@ -9,7 +9,7 @@ MAINTAINER Enrique Fernandez <efcasado@gmail.com>
 # Graphite port
 EXPOSE 8080:8080
 # Carbon plain-text port
-EXPOSE 2003:2003/udp
+EXPOSE 2003:2003
 # Carbon pickle port
 EXPOSE 2004:2004
 

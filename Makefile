@@ -11,7 +11,7 @@
 # Other valid values are: snapshot and release
 ENV         ?= dev
 
-DOCKER_OPTS := -d -p 8080:8080 -p 2003:2003/udp -p 2004:2004
+DOCKER_OPTS := -d -p 8080:8080 -p 2003:2003 -p 2004:2004
 
 ##=========================================================================
 ## Variables
