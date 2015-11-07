@@ -47,7 +47,7 @@ all: | build
 build:
 	$(DOCKER) build -t $(TAG) .
 
-start:
+start: | build
 	$(DOCKER) run --name $(PROJECT) $(DOCKER_OPTS) $(TAG)
 
 stop:
