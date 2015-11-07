@@ -28,7 +28,7 @@ make stop
 > This can easily be done by running the following command:
 >
 > ```
-> VBoxManage controlvm "<docker-host-name>" natpf1 "<pfrule-name>,tcp,,<local-port>,,<remote-port>"
+> VBoxManage controlvm "<docker-host-name>" natpf1 "<pfrule-name>,<protocol>,,<local-port>,,<remote-port>"
 > ```
 >
 > Note that the above command will only work if the Docker host
@@ -36,7 +36,7 @@ make stop
 > this other command instead:
 >
 > ```
-> VBoxManage modifyvm "<docker-host-name>" --natpf1 "<pfrule-name>,tcp,,<local-port>,,<remote-port>"
+> VBoxManage modifyvm "<docker-host-name>" --natpf1 "<pfrule-name>,<protocol>,,<local-port>,,<remote-port>"
 > ```
 
 
