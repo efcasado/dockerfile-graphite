@@ -36,6 +36,15 @@ make stop
 > ```
 
 
+### Ports
+
+| Port Number | Protocol | Description                                                   |
+|:-----------:|:--------:|---------------------------------------------------------------|
+| 8080        | TCP      | Graphite web dashboard                                        |
+| 2003        | UDP      | Feed in data to Graphite using the plain text protocol        |
+| 2004        | TCP      | Feed in data to Graphite using the pickle protocol            |
+
+
 ### Author(s)
 
 - Enrique Fernandez `<efcasado@gmail.com>`
