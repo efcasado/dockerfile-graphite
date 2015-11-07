@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-service carbon-cache start
-/opt/graphite/bin/run-graphite-devel-server.py /opt/graphite/
-
-exec "$@"
+if [ $# -eq 0 ]; then
+    exec supervisord -c /usr/etc/supervisord.conf --nodaemon
+else
+    supervisord -c /usr/etc/supervisord.conf
+    exec "$@"
+fi

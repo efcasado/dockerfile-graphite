@@ -16,6 +16,7 @@ EXPOSE 2004:2004
 # Install Graphite
 RUN yum install -y epel-release &&       \
     yum install -y                       \
+        supervisor                       \
         net-snmp                         \
         perl                             \
         bitmap                           \
@@ -41,6 +42,9 @@ ADD etc/httpd/ /etc/httpd/
 ADD etc/init.d/ /etc/init.d/
 RUN cd /opt/graphite/webapp/graphite && \
     python manage.py syncdb --noinput
+
+# Configure supervisord
+COPY usr/etc/supervisord.conf /usr/etc/supervisord.conf
 
 COPY ./docker-entrypoint.sh docker-entrypoint.sh
 ENTRYPOINT [ "./docker-entrypoint.sh" ]
