@@ -9,32 +9,33 @@
 ##=========================================================================
 
 # Other valid values are: snapshot and release
-ENV        ?= dev
+ENV         ?= dev
 
+DOCKER_OPTS := -d -p 8080:8080 -p 2003:2003/udp -p 2004:2004
 
 ##=========================================================================
 ## Variables
 ##=========================================================================
 
-PROJECT    := graphite
+PROJECT     := graphite
 
-GIT_TAG    := $(shell git describe --tags 2> /dev/null)
-GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD 2> /dev/null)
-GIT_COMMIT := $(shell git rev-parse --short HEAD 2> /dev/null)
+GIT_TAG     := $(shell git describe --tags 2> /dev/null)
+GIT_BRANCH  := $(shell git rev-parse --abbrev-ref HEAD 2> /dev/null)
+GIT_COMMIT  := $(shell git rev-parse --short HEAD 2> /dev/null)
 
 ifeq ($(ENV),snapshot)
-VERSION    := $(GIT_BRANCH)-git$(GIT_COMMIT)
+VERSION     := $(GIT_BRANCH)-git$(GIT_COMMIT)
 else ifeq ($(ENV),release)
-VERSION    := $(GIT_TAG)
+VERSION     := $(GIT_TAG)
 endif
 
 ifeq ($(ENV),dev)
-TAG        := $(PROJECT)
+TAG         := $(PROJECT)
 else
-TAG        := $(PROJECT):$(VERSION)
+TAG         := $(PROJECT):$(VERSION)
 endif
 
-DOCKER     := $(shell which docker)
+DOCKER      := $(shell which docker)
 
 
 ##=========================================================================
@@ -47,7 +48,7 @@ build:
 	$(DOCKER) build -t $(TAG) .
 
 start:
-	$(DOCKER) run -d --name $(PROJECT) $(TAG)
+	$(DOCKER) run --name $(PROJECT) $(DOCKER_OPTS) $(TAG)
 
 stop:
 	$(DOCKER) stop $(PROJECT)
