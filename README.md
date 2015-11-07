@@ -1,6 +1,10 @@
 Graphite Dockerfile
 ===================
 
+[Graphite](http://graphite.wikidot.com/) is a real-time graphing system.
+Graphite features two data ingestion protocols that make it very easy
+for any application to send their numeric time-series data to Graphite.
+
 
 ### Build
 
@@ -36,23 +40,21 @@ make stop
 > ```
 
 
-### How do I know it is working?
+### Test
 
-First, run `make start`, which will start a docker container running this
-docker image. Once the docker container is running, you can open your
-favourite web browser and go to `localhost:8080`. If the docker container
-is running and properly configured you should be presented with Graphite's
-web dashboard. You can try sending some dummy metrics using the following
-code snippet:
+First, deploy a Graphite server by running `make start`. Once deployed,
+Graphite's web dashboard should be available at `localhost:8080`. If
+Graphite has been successfully deployed, you can use the following
+command to send some test data to it.
 
 ```
 echo "local.random.diceroll $RANDOM `date +%s`" | nc localhost 2003;
 ```
 
-If everything is properly configured, you should see a new data point in
-`Metrics -> local -> random -> diceroll`. Note that you might need
-to shorten the period displayed in the graph in order to see the newly
-generated data point.
+The Graphite dashboard should now display a new data point under
+`Metrics -> local -> random -> diceroll`. Note that you might need to
+change time interval of the graph, or you won't be able to see
+the newly added data point.
 
 
 ### Ports
