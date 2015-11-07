@@ -36,12 +36,31 @@ make stop
 > ```
 
 
+### How do I know it is working?
+
+First, run `make start`, which will start a docker container running this
+docker image. Once the docker container is running, you can open your
+favourite web browser and go to `localhost:8080`. If the docker container
+is running and properly configured you should be presented with Graphite's
+web dashboard. You can try sending some dummy metrics using the following
+code snippet:
+
+```
+echo "local.random.diceroll $RANDOM `date +%s`" | nc localhost 2003;
+```
+
+If everything is properly configured, you should see a new data point in
+`Metrics -> local -> random -> diceroll`. Note that you might need
+to shorten the period displayed in the graph in order to see the newly
+generated data point.
+
+
 ### Ports
 
 | Port Number | Protocol | Description                                                   |
 |:-----------:|:--------:|---------------------------------------------------------------|
 | 8080        | TCP      | Graphite web dashboard                                        |
-| 2003        | UDP      | Feed in data to Graphite using the plain text protocol        |
+| 2003        | TCP      | Feed in data to Graphite using the plain text protocol        |
 | 2004        | TCP      | Feed in data to Graphite using the pickle protocol            |
 
 
