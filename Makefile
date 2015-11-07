@@ -45,3 +45,10 @@ all: | build
 
 build:
 	$(DOCKER) build -t $(TAG) .
+
+start:
+	$(DOCKER) run -d --name $(PROJECT) $(TAG)
+
+stop:
+	$(DOCKER) stop $(PROJECT)
+	$(DOCKER) rm $(PROJECT)
